@@ -15,9 +15,12 @@ code {
 }
 
 button {
-  display: block;
   border-radius: 6px;
   background-color: whitesmoke;
   color: black;
   cursor: pointer;
+}
+
+#votes {
+  color: whitesmoke;
 }

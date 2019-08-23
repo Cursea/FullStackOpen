@@ -4,28 +4,40 @@ import './index.css'
 
 const App = (props) => {
     const [selected, setSelected] = useState(0)
-    const min = 0
-    const max = anecdotes.length - 1
-    const setToValue = (set, min, max) => () => {
-        set(Math.floor(Math.random() * (max - min + 1) + min))
+    const [points, setPoints] = useState({
+        0: 0,
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0,
+        5: 0
+    })
+
+    const setToValue = (set, max) => () => {
+        set(Math.floor(Math.random() * (max + 1)))
     }
+
+    const addPoints = (set, key) => () => {
+        //spread the {points} object to copy the original (no mutattion), and adds 1 to the original value of the value at key place [key]
+        return set({ ...points, [key]: points[key] + 1 })
+    }
+
+    console.log('selected: ', selected, ' points: ', points)
 
     return (
         <div>
-            {props.anecdotes[selected]}
-            <Button random={setToValue(setSelected, min, max)} text='next anecdote' />
+            <p>{props.anecdotes[selected]}</p>
+            <p>has <span id="votes">{points[selected]}</span> votes</p>
+            <Button random={addPoints(setPoints, selected)} text='vote' />
+            <Button random={setToValue(setSelected, anecdotes.length - 1)} text='next anecdote' />
         </div>
     )
 }
 
-const Button = ({ random, text }) => {
-
-    return (
-        <button onClick={random}>
-            {text}
-        </button>
-    )
-}
+const Button = ({ random, text }) =>
+    <button onClick={random}>
+        {text}
+    </button>
 
 const anecdotes = [
     'If it hurts, do it more often',
