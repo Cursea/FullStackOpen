@@ -22,14 +22,20 @@ const App = (props) => {
         return set({ ...points, [key]: points[key] + 1 })
     }
 
+    const highestVote = (obj) =>
+        Object.keys(obj).reduce((a, b) => obj[a] > obj[b] ? a : b)
+
     console.log('selected: ', selected, ' points: ', points)
 
     return (
         <div>
+            <h2>Anecdote of the day</h2>
             <p>{props.anecdotes[selected]}</p>
             <p>has <span id="votes">{points[selected]}</span> votes</p>
             <Button random={addPoints(setPoints, selected)} text='vote' />
             <Button random={setToValue(setSelected, anecdotes.length - 1)} text='next anecdote' />
+            <h2>Anecdote with most votes</h2>
+            <p>{anecdotes[highestVote(points)]}</p>
         </div>
     )
 }
