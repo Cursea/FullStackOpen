@@ -36,6 +36,7 @@ const App = (props) => {
             <Button random={setToValue(setSelected, anecdotes.length - 1)} text='next anecdote' />
             <h2>Anecdote with most votes</h2>
             <p>{anecdotes[highestVote(points)]}</p>
+            <p>with <span id="highest">{points[highestVote(points)]}</span> votes</p>
         </div>
     )
 }
