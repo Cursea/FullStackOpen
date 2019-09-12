@@ -1,18 +1,21 @@
 import React, { useState } from 'react'
 
 const App = () => {
-  const [ persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
-  ]) 
-  const [ newName, setNewName ] = useState('')
+  const [persons, setPersons] = useState([
+    {
+      name: 'Arto Hellas',
+      id: 1
+    }
+  ])
+  const [newName, setNewName] = useState('')
 
-  const rows = () => persons.map(person =>
-    <div>{person.name}</div>)
+  const rows = () => persons.map(person => 
+    <div key={person.id}>{person.name}</div>)
 
   const addName = (event) => {
     event.preventDefault()
     const nameObject = {
-      id: persons.length +1,
+      id: persons.length + 1,
       name: newName
     }
 
@@ -42,7 +45,7 @@ const App = () => {
       <h2>Numbers</h2>
       {rows()}
     </div>
-    
+
   )
 }
 
