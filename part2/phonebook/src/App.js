@@ -9,7 +9,7 @@ const App = () => {
   ])
   const [newName, setNewName] = useState('')
 
-  const rows = () => persons.map(person => 
+  const rows = () => persons.map(person =>
     <div key={person.id}>{person.name}</div>)
 
   const addName = (event) => {
@@ -19,8 +19,15 @@ const App = () => {
       name: newName
     }
 
-    setPersons(persons.concat(nameObject))
-    setNewName('')
+    //check if person already exists in phonebook; search each key among persons objects for a match and returns Boolean
+    if (persons.some(e => e.name === newName)) {
+      window.alert(`${nameObject.name} is already added to the phonebook`)
+
+    } else {
+      setPersons(persons.concat(nameObject))
+      setNewName('')
+    }
+
   }
 
   const handleNameChange = (event) => {
@@ -32,8 +39,8 @@ const App = () => {
       <h2>Phonebook</h2>
       <form onSubmit={addName}>
         <div>
-          name: 
-          <input 
+          name:
+          <input
             value={newName}
             onChange={handleNameChange}
           />
