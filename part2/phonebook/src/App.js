@@ -3,29 +3,32 @@ import React, { useState } from 'react'
 const App = () => {
   const [persons, setPersons] = useState([
     {
+      id: 1,
       name: 'Arto Hellas',
-      id: 1
+      number: '07986504758'
     }
   ])
   const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
 
   const rows = () => persons.map(person =>
-    <div key={person.id}>{person.name}</div>)
+    <div key={person.id}>{person.name} {person.number}</div>)
 
-  const addName = (event) => {
+  const addPerson = (event) => {
     event.preventDefault()
-    const nameObject = {
+    const personObject = {
       id: persons.length + 1,
-      name: newName
+      name: newName,
+      number: newNumber
     }
 
     //check if person already exists in phonebook; search each key among persons objects for a match and returns Boolean
     if (persons.some(e => e.name === newName)) {
-      window.alert(`${nameObject.name} is already added to the phonebook`)
-
+      window.alert(`${personObject.name} is already added to the phonebook`)
     } else {
-      setPersons(persons.concat(nameObject))
+      setPersons(persons.concat(personObject))
       setNewName('')
+      setNewNumber('')
     }
 
   }
@@ -34,15 +37,28 @@ const App = () => {
     setNewName(event.target.value)
   }
 
+  const handleNumberChange = (event) => {
+    setNewNumber(event.target.value)
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
-      <form onSubmit={addName}>
+      <form onSubmit={addPerson}>
         <div>
-          name:
+          <label htmlFor="name">Name: </label>
           <input
             value={newName}
             onChange={handleNameChange}
+            id="name"
+          />
+        </div>
+        <div>
+          <label htmlFor="number">Number: </label>
+          <input
+            value={newNumber}
+            onChange={handleNumberChange}
+            id="number"
           />
         </div>
         <div>
