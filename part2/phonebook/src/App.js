@@ -44,6 +44,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Filter />
+      <h3>Add new entry</h3>
       <form onSubmit={addPerson}>
         <div>
           <label htmlFor="name">Name: </label>
@@ -69,6 +71,26 @@ const App = () => {
       {rows()}
     </div>
 
+  )
+}
+
+const Filter = () => {
+  const [filter, setFilter] = useState('')
+
+  const handleFilterChange = (event) => {
+    setFilter(event.target.value)
+  }
+
+  return (
+    <div>
+      <h3>Filter phonebook</h3>
+      <label htmlFor="filter">Filter names: </label>
+      <input
+        value={filter}
+        onChange={handleFilterChange}
+        id="filter"
+      />
+    </div>
   )
 }
 
