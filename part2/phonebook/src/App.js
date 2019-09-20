@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
+import Persons from './components/Persons'
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -58,75 +61,6 @@ const App = () => {
         persons={persons}
         filter={filter}
       />
-    </div>
-
-  )
-}
-
-const Filter = ({ filter, handleFilterChange }) => {
-
-  return (
-    <div>
-      <h3>Filter phonebook</h3>
-      <label htmlFor="filter">Filter names: </label>
-      <input
-        value={filter}
-        onChange={handleFilterChange}
-        id="filter"
-      />
-    </div>
-  )
-}
-
-const PersonForm = ({ addPerson, name, number }) => {
-
-  return (
-    <form onSubmit={addPerson}>
-      <div>
-        <label htmlFor="name">Name: </label>
-        <input
-          value={name.newName}
-          onChange={name.onChange}
-          id="name"
-        />
-      </div>
-      <div>
-        <label htmlFor="number">Number: </label>
-        <input
-          value={number.newNumber}
-          onChange={number.onChange}
-          id="number"
-        />
-      </div>
-      <div>
-        <button type="submit">add</button>
-      </div>
-    </form>
-  )
-}
-
-const Persons = ({ persons, filter }) => {
-
-  const rows = () => persons.map(person =>
-    <div key={person.id}>{person.name} {person.number}</div>)
-
-  const numbersToShow = () => {
-    if (filter === '') {
-      return (rows())
-    } else {
-      return (
-        persons
-          .filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
-          .map(person =>
-            <div key={person.id}>{person.name} {person.number}</div>)
-        //above .map method on the filter duplicates rows() method..
-      )
-    }
-  }
-
-  return (
-    <div>
-      {numbersToShow()}
     </div>
   )
 }
