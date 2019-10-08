@@ -20,16 +20,6 @@ const App = () => {
 
   console.log('render', notes.length, 'notes')
 
-  /*const promise = axios
-    .get('http://localhost:3001/notes')
-    .then(response => {
-      const notes = response.data
-      ReactDOM.render(
-        <App notes={notes} />,
-        document.getElementById('root')
-      )
-    })*/
-
   const notesToShow = showAll
     ? notes
     : notes.filter(note => note.important)
