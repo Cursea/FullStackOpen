@@ -7,16 +7,25 @@ import Countries from './components/Countries'
 function App() {
 
   const [filter, setFilter] = useState('')
+  const [country, setCountry] = useState('')
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value)
   }
 
+  useEffect(() => {
+    axios
+      .get('https://restcountries.eu/rest/v2/all')
+      .then(response => {
+        setCountry(response.data)
+      })
+  }, [])
+
   return (
     <div>
       <Filter filter={filter} setFilter={handleFilterChange} />
-
-      <Countries filter={filter} />
+      {console.log(country)}
+      <Countries filter={filter} country={country}/>
     </div>
   )
 }
