@@ -9,7 +9,10 @@ function App() {
   const [filter, setFilter] = useState('')
   const [countries, setCountry] = useState('')
   const [weather, setWeather] = useState('')
-  const [display, setDisplay] = useState('')
+
+  const showCountry = (name) => {
+    setFilter(name);
+  }
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value)
@@ -37,7 +40,7 @@ function App() {
     <div>
       <Filter filter={filter} setFilter={handleFilterChange} />
 
-      <Countries filter={filter} countries={countries} weather={weather} />
+      <Countries filter={filter} countries={countries} weather={weather} showCountry={showCountry} />
     </div>
   )
 }
