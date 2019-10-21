@@ -3,37 +3,32 @@ import './App.css';
 import axios from 'axios';
 import Filter from './components/Filter';
 import Countries from './components/Countries';
-import Weather from './components/Weather';
+//import Weather from './components/Weather';
 
 function App() {
 
   const [filter, setFilter] = useState('')
-  const [countries, setCountry] = useState('')
+  const [countries, setCountries] = useState([])
 
-  //retrieve countries; sets a massive JSON blob to 'country'
   useEffect(() => {
-    axios
-      .get('https://restcountries.eu/rest/v2/all')
-      .then(response => {
-        setCountry(response.data)
-      })
+    axios.get('https://restcountries.eu/rest/v2/all').then(response => {
+      setCountries(response.data)
+    })
   }, [])
 
-  const showCountry = (name) => {
-    setFilter(name);
-  }
-
-  const handleFilterChange = (event) => {
+  const handleChange = (event) =>
     setFilter(event.target.value)
-  }
 
+  const filteredCountries = filter.length > 0
+    ? countries.filter(country => country.name.toLowerCase().includes(filter.toLowerCase()))
+    : countries
+    
   return (
     <div>
-      <Filter filter={filter} setFilter={handleFilterChange} />
+      <Filter filter={filter} setFilter={handleChange} />
 
-      <Countries filter={filter} countries={countries} showCountry={showCountry} />
+      <Countries countries={filteredCountries} setFilter={handleChange} />
 
-      <Weather capital={capital} />
     </div>
   )
 }
