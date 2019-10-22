@@ -3,7 +3,6 @@ import './App.css';
 import axios from 'axios';
 import Filter from './components/Filter';
 import Countries from './components/Countries';
-//import Weather from './components/Weather';
 
 function App() {
 
@@ -22,12 +21,12 @@ function App() {
   const filteredCountries = filter.length > 0
     ? countries.filter(country => country.name.toLowerCase().includes(filter.toLowerCase()))
     : countries
-    
+
   return (
     <div>
       <Filter filter={filter} setFilter={handleChange} />
 
-      <Countries countries={filteredCountries} setFilter={handleChange} />
+      <Countries countries={filteredCountries} showCountry={(country) => setFilter(country)} />
 
     </div>
   )
