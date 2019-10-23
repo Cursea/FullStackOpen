@@ -1,18 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import Weather from './Weather';
 
 const Country = ({ country }) => {
-    const [weather, setWeather] = useState(null)
-
-    //retrieve weather
-    useEffect(() => {
-        axios
-            .get(`http://api.weatherstack.com/current?access_key=4f8022b5b714698e39a011d2a53af96e&query=${country.capital}`)
-            .then(response => {
-                setWeather(response.data)
-            })
-    }, [])
 
     //grid styling, 3 columns
     const gridParentStyle = {
@@ -44,7 +33,7 @@ const Country = ({ country }) => {
             <div id="flag">
                 <img src={country.flag} style={flagStyle} alt="national flag" />
             </div>
-            <Weather weather={weather} />
+            <Weather capital={country.capital}/>
         </section>
     )
 }

@@ -36,3 +36,7 @@ html {
     transform: rotate(360deg);
   }
 }
+
+button {
+ margin-left: 7px; 
+}

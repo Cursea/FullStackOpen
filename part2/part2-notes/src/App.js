@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import './App.css';
-import axios from 'axios'
+import './App.css'
 import Note from './components/Note'
+import noteService from './services/notes'
 
 const App = () => {
   const [notes, setNotes] = useState([])
@@ -9,30 +9,37 @@ const App = () => {
   const [showAll, setShowAll] = useState(true)
 
   useEffect(() => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/notes')
+    noteService
+      .getAll()
       .then(response => {
-        console.log('promise fulfilled')
         setNotes(response.data)
       })
   }, [])
-
-  console.log('render', notes.length, 'notes')
 
   const notesToShow = showAll
     ? notes
     : notes.filter(note => note.important)
 
+  const toggleImportanceOf = id => {
+    const note = notes.find(n => n.id === id)
+    const changedNote = { ...note, important: !note.important }
+
+    noteService
+      .update(id, changedNote)
+      .then(response => {
+        setNotes(notes.map(note => note.id !== id ? note : response.data))
+      })
+  }
+
   const rows = () => notesToShow.map(note =>
     <Note
       key={note.id}
       note={note}
+      toggleImportance={() => toggleImportanceOf(note.id)}
     />
   )
 
   const handleNoteChange = (event) => {
-    console.log(event.target.value)
     setNewNote(event.target.value)
   }
 
@@ -45,8 +52,12 @@ const App = () => {
       id: notes.length + 1,
     }
 
-    setNotes(notes.concat(noteObject))
-    setNewNote('')
+    noteService
+      .create(noteObject)
+      .then(response => {
+        setNotes(notes.concat(response.data))
+        setNewNote('')
+      })
   }
 
   return (
@@ -71,10 +82,4 @@ const App = () => {
   )
 }
 
-
-
-
-const promise2 = axios.get('http://localhost:3001/foobar')
-console.log(promise2)
-
-export default App;
+export default App 
