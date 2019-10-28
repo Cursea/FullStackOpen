@@ -27,6 +27,9 @@ const App = () => {
   const handleNumberChange = (event) => {
     setNewNumber(event.target.value)
   }
+  const handleRemovePerson = (event) => {
+    console.log(event.currentTarget.parentNode.parentNode)
+  }
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -49,6 +52,14 @@ const App = () => {
     }
   }
 
+  const removePerson = (id) => {
+    phonebookService
+      .remove(id)
+      .then(returnedData => {
+        setPersons(returnedData)
+      })
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -67,6 +78,7 @@ const App = () => {
 
       <Persons
         persons={persons}
+        removePerson={removePerson}
         filter={filter}
       />
     </div>

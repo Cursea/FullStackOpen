@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Persons = ({ persons, filter }) => {
+const Persons = ({ persons, filter, remotePerson }) => {
 
   const rows = () => persons.map(person =>
-    <div key={person.id}>{person.name} {person.number}</div>)
+    <div key={person.id}>{person.name} {person.number} <span><button onClick={remotePerson}>delete</button></span></div>)
 
   const numbersToShow = () => {
     if (filter === '') {
