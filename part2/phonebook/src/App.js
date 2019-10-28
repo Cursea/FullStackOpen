@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
-import axios from 'axios'
-
+import phonebookService from './services/actions'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -12,10 +11,10 @@ const App = () => {
   const [filter, setFilter] = useState('')
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
+    phonebookService
+      .getAll()
       .then(response => {
-        setPersons(response.data)
+        setPersons(response)
       })
   }, []) //second parameter of useEffect is [] to only run the effect along with first render of component
 
@@ -39,11 +38,11 @@ const App = () => {
     //check if person already exists in phonebook; search each key among persons objects for a match and returns Boolean
     if (persons.some(e => e.name === newName)) {
       window.alert(`${newName} is already added to the phonebook`)
-    } else {
-      axios
-        .post('http://localhost:3001/persons', personObject)
-        .then(response => {
-          setPersons(persons.concat(response.data))
+    } else { //create new phonebook entry
+      phonebookService
+        .create(personObject)
+        .then(returnedData => {
+          setPersons(persons.concat(returnedData))
           setNewName('')
           setNewNumber('')
         })
