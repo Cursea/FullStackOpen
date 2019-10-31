@@ -1,114 +1,24 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
-      "number": "040-123456",
-      "id": 1
-    },
-    {
-      "name": "Ada Lovelace",
-      "number": "39-44-5323523",
-      "id": 2
-    },
-    {
-      "name": "Dan Abramov",
-      "number": "12-43-234345",
-      "id": 3
-    },
-    {
-      "name": "Mary Poppendieck",
-      "number": "39-23-6423122",
+      "name": "window.confirm test",
+      "number": "3540354",
       "id": 4
     },
     {
-      "id": 5,
-      "name": "New name",
-      "number": "564106"
+      "name": "new entry",
+      "number": "65405",
+      "id": 5
     },
     {
-      "id": 6,
-      "name": "Marco Burman",
-      "number": "07792527002"
+      "name": "json db number?!",
+      "number": "89049",
+      "id": 7
     },
     {
-      "id": 7,
-      "name": "Test Person",
-      "number": "668011016"
-    },
-    {
-      "id": 8,
-      "name": "Don't Error",
-      "number": "999"
-    },
-    {
-      "id": 9,
-      "name": "Step 7",
-      "number": "0181 995 3517"
-    },
-    {
-      "id": 10,
-      "name": "Response Test",
-      "number": "707898985"
-    },
-    {
-      "id": 11,
-      "name": "Axios Refactor",
-      "number": "18-48-335101"
-    },
-    {
-      "name": "ID Test",
-      "number": "80-18-66510",
-      "id": 12
-    },
-    {
-      "id": 13,
-      "name": "Re-render Test",
-      "number": "90-10-616810"
-    },
-    {
-      "id": 14,
-      "name": "Re-render No Highlight",
-      "number": "91-10-66101"
-    },
-    {
-      "id": 15,
-      "name": "Step Eight",
-      "number": "10-16-3381012"
-    },
-    {
-      "name": "ID Re-test",
-      "number": "90-01-4608468",
-      "id": 16
-    },
-    {
-      "id": 17,
-      "name": "Response Data",
-      "number": "5064068406"
-    },
-    {
-      "id": 18,
-      "name": "Break Points",
-      "number": "6046888"
-    },
-    {
-      "id": 19,
-      "name": "Removed Response.Data",
-      "number": "650464"
-    },
-    {
-      "id": 20,
-      "name": "Step Eight Complete?",
-      "number": "655046"
-    },
-    {
-      "id": 21,
-      "name": "Submit Handler",
-      "number": "4353"
-    },
-    {
-      "id": 22,
-      "name": "Violition Time",
-      "number": "90"
+      "name": "Marco Henriques Burman esq.",
+      "number": "077-9252-7002",
+      "id": 8
     }
   ]
 }

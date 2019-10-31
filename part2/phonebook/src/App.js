@@ -27,14 +27,10 @@ const App = () => {
   const handleNumberChange = (event) => {
     setNewNumber(event.target.value)
   }
-  const handleRemovePerson = (event) => {
-    console.log(event.currentTarget.parentNode.parentNode)
-  }
-
+  
   const addPerson = (event) => {
     event.preventDefault()
     const personObject = {
-      id: persons.length + 1,
       name: newName,
       number: newNumber
     }
@@ -45,6 +41,7 @@ const App = () => {
       phonebookService
         .create(personObject)
         .then(returnedData => {
+          console.log(returnedData)
           setPersons(persons.concat(returnedData))
           setNewName('')
           setNewNumber('')
@@ -52,12 +49,16 @@ const App = () => {
     }
   }
 
-  const removePerson = (id) => {
-    phonebookService
-      .remove(id)
-      .then(returnedData => {
-        setPersons(returnedData)
-      })
+  const removePerson = (personToRemove) => {
+    console.log(`id to be removed: ${personToRemove.id}, confirming...`)
+    if (window.confirm(`Delete ${personToRemove.name} from the phonebook?`)) {
+      phonebookService
+        .remove(personToRemove.id)
+        .then(
+          setPersons(persons.filter(persons => persons.id !== personToRemove.id)),
+          console.log(persons)
+        )
+    }
   }
 
   return (
