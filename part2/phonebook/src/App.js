@@ -35,13 +35,21 @@ const App = () => {
       number: newNumber
     }
     //check if person already exists in phonebook; search each key among persons objects for a match and returns Boolean
-    if (persons.some(e => e.name === newName)) {
+    if (persons.some(e => e.name === newName.toLocaleLowerCase())) {
+      if(newNumber !== null) {
+        let x = persons.filter(p => p.name.toLowerCase() === newName.toLowerCase())
+        console.log(`${newNumber} is not null`)
+        phonebookService
+          .update(x[0].id, newNumber)
+          .then(response => {
+            setPersons(persons.map(person => person.id !== x.id ? person : response.data))
+          })
+      }
       window.alert(`${newName} is already added to the phonebook`)
     } else { //create new phonebook entry
       phonebookService
         .create(personObject)
         .then(returnedData => {
-          console.log(returnedData)
           setPersons(persons.concat(returnedData))
           setNewName('')
           setNewNumber('')
@@ -59,6 +67,10 @@ const App = () => {
           console.log(persons)
         )
     }
+  }
+
+  const updatePerson = (personToUpdate) => {
+
   }
 
   return (

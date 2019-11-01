@@ -10,6 +10,7 @@ const PersonForm = ({ addPerson, name, number }) => {
           value={name.newName}
           onChange={name.onChange}
           id="name"
+          autoComplete="off"
         />
       </div>
       <div>
@@ -18,6 +19,7 @@ const PersonForm = ({ addPerson, name, number }) => {
           value={number.newNumber}
           onChange={number.onChange}
           id="number"
+          autoComplete="off"
         />
       </div>
       <div>
