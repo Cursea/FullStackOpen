@@ -11,11 +11,14 @@ const Persons = ({ persons, filter, removePerson }) => {
     if (filter === '') {
       return (rows())
     } else {
+      console.log(persons)
       return (
         persons
           .filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
           .map(person =>
-            <div key={person.id}>{person.name} {person.number}</div>)
+            <div key={person.id}> {person.name} {person.number}
+              <button id="delete-button" onClick={() => removePerson(person)}>delete</button>
+            </div>)
         //above .map method on the filter duplicates rows() method..
       )
     }

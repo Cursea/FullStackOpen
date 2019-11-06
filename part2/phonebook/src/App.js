@@ -27,25 +27,32 @@ const App = () => {
   const handleNumberChange = (event) => {
     setNewNumber(event.target.value)
   }
-  
+
   const addPerson = (event) => {
     event.preventDefault()
     const personObject = {
       name: newName,
       number: newNumber
     }
-    //check if person already exists in phonebook; search each key among persons objects for a match and returns Boolean
-    if (persons.some(e => e.name === newName.toLocaleLowerCase())) {
-      if(newNumber !== null) {
-        let x = persons.filter(p => p.name.toLowerCase() === newName.toLowerCase())
-        console.log(`${newNumber} is not null`)
-        phonebookService
-          .update(x[0].id, newNumber)
-          .then(response => {
-            setPersons(persons.map(person => person.id !== x.id ? person : response.data))
-          })
-      }
+
+    if (persons.some(e => e.name === newName.toLowerCase() && e.number === newNumber)) {
       window.alert(`${newName} is already added to the phonebook`)
+      return 0
+    }
+
+    //check person exists in phonebook; search keys among persons for match; return Boolean
+    if (persons.some(e => e.name === newName.toLowerCase()) && newNumber !== null) {
+        if (window.confirm(`Update the number for ${newName}?`)) {
+          let existingPerson = persons.filter(p => p.name.toLowerCase() === newName.toLowerCase())
+          phonebookService
+            .update(existingPerson[0].id, personObject)
+            .then(response => {
+              setPersons(persons.map(person => person.id !== existingPerson.id ? person : response))
+              console.log(persons)
+              setNewName('')
+              setNewNumber('')
+            })
+        }
     } else { //create new phonebook entry
       phonebookService
         .create(personObject)
@@ -58,19 +65,13 @@ const App = () => {
   }
 
   const removePerson = (personToRemove) => {
-    console.log(`id to be removed: ${personToRemove.id}, confirming...`)
     if (window.confirm(`Delete ${personToRemove.name} from the phonebook?`)) {
       phonebookService
         .remove(personToRemove.id)
         .then(
           setPersons(persons.filter(persons => persons.id !== personToRemove.id)),
-          console.log(persons)
         )
     }
-  }
-
-  const updatePerson = (personToUpdate) => {
-
   }
 
   return (

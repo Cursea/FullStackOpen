@@ -1,38 +1,19 @@
 {
   "persons": [
     {
-      "name": "window.confirm test",
-      "number": "3540354",
-      "id": 4
+      "name": "test person",
+      "number": "6501651",
+      "id": 1
     },
     {
-      "number": "66801",
-      "id": 5
-    },
-    {
-      "name": "json db number?!",
-      "number": "89049",
-      "id": 7
-    },
-    {
-      "name": "Marco Henriques Burman esq.",
-      "number": "077-9252-7002",
-      "id": 8
-    },
-    {
-      "name": "new entry2",
-      "number": "8630438540",
-      "id": 9
+      "name": "marco burman",
+      "number": "909041",
+      "id": 2
     },
     {
       "name": "test",
-      "number": "",
-      "id": 10
-    },
-    {
-      "name": "tes",
-      "number": "",
-      "id": 11
+      "number": "3501",
+      "id": 3
     }
   ]
 }
