@@ -33,7 +33,7 @@
     {
       "content": "random chance of important note",
       "date": "2019-10-22T15:33:07.241Z",
-      "important": true,
+      "important": false,
       "id": 6
     },
     {
@@ -45,7 +45,7 @@
     {
       "content": "console",
       "date": "2019-10-22T15:39:39.528Z",
-      "important": true,
+      "important": false,
       "id": 8
     },
     {
@@ -75,7 +75,7 @@
     {
       "content": "refactored notes",
       "date": "2019-10-24T09:57:54.449Z",
-      "important": false,
+      "important": true,
       "id": 13
     }
   ]

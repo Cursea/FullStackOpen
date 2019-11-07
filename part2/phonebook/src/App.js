@@ -47,8 +47,7 @@ const App = () => {
           phonebookService
             .update(existingPerson[0].id, personObject)
             .then(response => {
-              setPersons(persons.map(person => person.id !== existingPerson.id ? person : response))
-              console.log(persons)
+              setPersons(persons.map(person => person.id !== existingPerson[0].id ? person : response))
               setNewName('')
               setNewNumber('')
             })
