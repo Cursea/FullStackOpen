@@ -3,12 +3,14 @@ import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import phonebookService from './services/actions'
+import Notification from './components/Notificaion'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
     phonebookService
@@ -51,6 +53,14 @@ const App = () => {
               setNewName('')
               setNewNumber('')
             })
+            .catch(error => {
+              setErrorMessage(
+                `Updated record for ${newName}`
+              )
+              setTimeout(() => {
+                setErrorMessage(null)
+              }, 5000)
+            })
         }
     } else { //create new phonebook entry
       phonebookService
@@ -59,6 +69,14 @@ const App = () => {
           setPersons(persons.concat(returnedData))
           setNewName('')
           setNewNumber('')
+        })
+        .catch(error => {
+          setErrorMessage(
+            `Added ${newName} to the phonebook`
+          )
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
         })
     }
   }
@@ -76,6 +94,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+
+      <Notification message={ errorMessage } />
 
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
 
