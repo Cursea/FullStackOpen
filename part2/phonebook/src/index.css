@@ -18,10 +18,10 @@ code {
   margin-left: 7px;
 }
 
-.error {
-  color: red;
+.update {
+  color: green;
   background: lightgrey;
-  width: 25%;
+  width: 50%;
   font-size: 17px;
   border-style: solid;
   border-radius: 5px;

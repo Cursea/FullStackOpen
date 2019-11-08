@@ -37,13 +37,13 @@ const App = () => {
       number: newNumber
     }
 
-    if (persons.some(e => e.name === newName.toLowerCase() && e.number === newNumber)) {
+    if (persons.some(e => e.name.toLowerCase() === newName.toLowerCase() && e.number === newNumber)) {
       window.alert(`${newName} is already added to the phonebook`)
       return 0
     }
 
     //check person exists in phonebook; search keys among persons for match; return Boolean
-    if (persons.some(e => e.name === newName.toLowerCase()) && newNumber !== null) {
+    if (persons.some(e => e.name.toLowerCase() === newName.toLowerCase()) && newNumber !== null) {
         if (window.confirm(`Update the number for ${newName}?`)) {
           let existingPerson = persons.filter(p => p.name.toLowerCase() === newName.toLowerCase())
           phonebookService
@@ -52,8 +52,7 @@ const App = () => {
               setPersons(persons.map(person => person.id !== existingPerson[0].id ? person : response))
               setNewName('')
               setNewNumber('')
-            })
-            .catch(error => {
+              //notification message
               setErrorMessage(
                 `Updated record for ${newName}`
               )
@@ -69,8 +68,7 @@ const App = () => {
           setPersons(persons.concat(returnedData))
           setNewName('')
           setNewNumber('')
-        })
-        .catch(error => {
+          //notification message
           setErrorMessage(
             `Added ${newName} to the phonebook`
           )
