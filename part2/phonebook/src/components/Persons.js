@@ -11,7 +11,6 @@ const Persons = ({ persons, filter, removePerson }) => {
     if (filter === '') {
       return (rows())
     } else {
-      console.log(persons)
       return (
         persons
           .filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))

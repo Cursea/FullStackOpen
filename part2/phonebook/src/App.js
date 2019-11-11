@@ -11,6 +11,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
+  const [success, setSuccess] = useState(true)
 
   useEffect(() => {
     phonebookService
@@ -44,23 +45,29 @@ const App = () => {
 
     //check person exists in phonebook; search keys among persons for match; return Boolean
     if (persons.some(e => e.name.toLowerCase() === newName.toLowerCase()) && newNumber !== null) {
-        if (window.confirm(`Update the number for ${newName}?`)) {
-          let existingPerson = persons.filter(p => p.name.toLowerCase() === newName.toLowerCase())
-          phonebookService
-            .update(existingPerson[0].id, personObject)
-            .then(response => {
-              setPersons(persons.map(person => person.id !== existingPerson[0].id ? person : response))
-              setNewName('')
-              setNewNumber('')
-              //notification message
-              setErrorMessage(
-                `Updated record for ${newName}`
-              )
-              setTimeout(() => {
-                setErrorMessage(null)
-              }, 5000)
-            })
-        }
+      if (window.confirm(`Update the number for ${newName}?`)) {
+        let existingPerson = persons.filter(p => p.name.toLowerCase() === newName.toLowerCase())
+        phonebookService
+          .update(existingPerson[0].id, personObject)
+          .then(response => {
+            setPersons(persons.map(person => person.id !== existingPerson[0].id ? person : response))
+            setNewName('')
+            setNewNumber('')
+            //5 sec notification message
+            setErrorMessage(`Updated record for ${newName}`)
+            setSuccess(true)
+            setTimeout(() => {
+              setErrorMessage(null)
+            }, 5000)
+          })
+          .catch(error => {
+            setErrorMessage(`Cannot update: ${newName} has already been removed from the server`)
+            setSuccess(false)
+            setTimeout(() => {
+              setErrorMessage(null)
+            }, 5000)
+          })
+      }
     } else { //create new phonebook entry
       phonebookService
         .create(personObject)
@@ -68,10 +75,8 @@ const App = () => {
           setPersons(persons.concat(returnedData))
           setNewName('')
           setNewNumber('')
-          //notification message
-          setErrorMessage(
-            `Added ${newName} to the phonebook`
-          )
+          setErrorMessage(`Added ${newName} to the phonebook`)
+          setSuccess(true)
           setTimeout(() => {
             setErrorMessage(null)
           }, 5000)
@@ -93,7 +98,7 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
 
-      <Notification message={ errorMessage } />
+      <Notification message={errorMessage} success={success} />
 
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
 
