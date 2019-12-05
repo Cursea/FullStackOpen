@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = `http://localhost:3001/notes`
+const baseUrl = `http://localhost:3001/notes` //use https://protected-island-73178.herokuapp.com/notes/2 to hook up with heroku back-end
 
 const getAll = () => {
     const request = axios.get(baseUrl)
