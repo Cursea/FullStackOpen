@@ -19,3 +19,4 @@ const update = (id, newObject) => {
 
 // Shorthand property names (ES2015)
 export default { getAll, create, update }
+
