@@ -1,6 +1,11 @@
 import axios from 'axios';
 
-const baseUrl = `http://localhost:3001/notes` //use https://protected-island-73178.herokuapp.com/notes/2 to hook up with heroku back-end
+/*
+use http://localhost:3001/notes for using own server
+use fixed url https://protected-island-73178.herokuapp.com/notes/2 to hook up with Heroku back-end
+use relative link /notes if frontend and backend are at the same address in Heroku
+*/
+const baseUrl = '/api/notes'
 
 const getAll = () => {
     const request = axios.get(baseUrl)
