@@ -3,7 +3,7 @@ import axios from 'axios';
 /*
 use http://localhost:3001/notes for using own server
 use fixed url https://protected-island-73178.herokuapp.com/notes/2 to hook up with Heroku back-end
-use relative link /notes if frontend and backend are at the same address in Heroku
+use relative link api/notes if frontend and backend are at the same address in Heroku
 */
 const baseUrl = '/api/notes'
 
