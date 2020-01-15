@@ -61,7 +61,7 @@ const App = () => {
             }, 5000)
           })
           .catch(error => {
-            setErrorMessage(`Cannot update: ${newName} has already been removed from the server`)
+            setErrorMessage(`Cannot update: ${newName} has already been removed from the server. ${error}`)
             setSuccess(false)
             setTimeout(() => {
               setErrorMessage(null)
