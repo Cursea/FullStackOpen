@@ -14,8 +14,11 @@ const blogSchema = mongoose.Schema({
 
 const Blog = mongoose.model('Blog', blogSchema)
 
-const mongoUrl = 'mongodb://localhost/bloglist'
-mongoose.connect(mongoUrl, { useNewUrlParser: true })
+const mongoUrl = 'mongodb://localhost/blog-list'
+mongoose.connect(mongoUrl, { 
+  useNewUrlParser: true, 
+  useUnifiedTopology: true
+  })
 
 app.use(cors())
 app.use(bodyParser.json())
@@ -38,7 +41,7 @@ app.post('/api/blogs', (request, response) => {
     })
 })
 
-const PORT = 3003
+const PORT = 3003 // || process.env.PORT 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
