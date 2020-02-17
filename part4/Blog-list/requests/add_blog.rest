@@ -2,8 +2,8 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-    "title": "titleTest",
-    "author": "authorTest",
-    "url": "http://imdb.com/blogs",
-    "likes": 2
+    "title": "KOTTKE.ORG",
+    "author": "Jason Kottke",
+    "url": "https://kottke.org/",
+    "likes": 13904327
 }
