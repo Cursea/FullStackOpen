@@ -4,32 +4,8 @@ const app = express()
 require('dotenv').config()
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const mongoose = require('mongoose')
 
-const blogSchema = mongoose.Schema({
-  title: String,
-  author: String,
-  url: String,
-  likes: Number
-})
-
-const Blog = mongoose.model('Blog', blogSchema)
-
-const url = process.env.MONGODB_URI
-
-mongoose
-  .connect(url, { 
-    useNewUrlParser: true, 
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true
-  })
-  .then(() => {
-    console.log('connected to MongoDB')
-  })
-  .catch(error => {
-    console.log(`error connecting to MongoDB: ${error.message}`)
-  })
+const Blog = require('./models/blog')
 
 app.use(cors())
 app.use(bodyParser.json())

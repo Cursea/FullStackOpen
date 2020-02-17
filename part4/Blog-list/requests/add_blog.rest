@@ -2,8 +2,8 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-    "title": "KOTTKE.ORG",
-    "author": "Jason Kottke",
-    "url": "https://kottke.org/",
-    "likes": 13904327
+    "title": "Bela Megale",
+    "author": "Bela Megale",
+    "url": "https://blogs.oglobo.globo.com/bela-megale",
+    "likes": 6508
 }
