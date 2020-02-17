@@ -2,8 +2,8 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-    "title": "Bela Megale",
-    "author": "Bela Megale",
-    "url": "https://blogs.oglobo.globo.com/bela-megale",
-    "likes": 6508
+    "title": "Basic thinking",
+    "author": "Robert Basic",
+    "url": "https://www.basicthinking.de/blog/",
+    "likes": 890569
 }
