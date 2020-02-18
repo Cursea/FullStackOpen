@@ -2,8 +2,8 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-    "title": "Basic thinking",
-    "author": "Robert Basic",
-    "url": "https://www.basicthinking.de/blog/",
-    "likes": 890569
+    "title": "The Sartorialist",
+    "author": "Scott Schuman",
+    "url": "thesartorialist.blogspot.com",
+    "likes": 981011
 }
