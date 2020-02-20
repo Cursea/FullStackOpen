@@ -11,11 +11,16 @@ const totalLikes = (blogs) => {
 }
 
 const favouriteBlog = (blogs) => {
-  const maxLikes = Math.max(...blogs.map(el => el.likes))
-  const best = blogs.map(blogs.find(blog => blog.likes  === maxLikes))
+  if(!blogs && !blogs.length) {
+    return null
+  }
+
+  let bestBlog = [...blogs].sort((a,b) => b.likes - a.likes)[0]
 
   return {
-    f: 2
+    title: bestBlog.title,
+    author: bestBlog.author,
+    likes: bestBlog.likes
   }
 }
 
