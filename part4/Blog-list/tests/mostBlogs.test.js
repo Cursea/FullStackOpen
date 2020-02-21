@@ -56,7 +56,8 @@ describe('author with most blogs (grouped)', () => {
   test('the author with the most blogs is the most prolific writer', () => {
     const results = listHelper.mostBlogs(blogs)
     expect(results).toEqual({
-      title: null
+      author: 'Robert C. Martin',
+      blogs: 3
     })
   })
 
