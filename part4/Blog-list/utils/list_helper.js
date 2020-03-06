@@ -54,13 +54,18 @@ const mostLikes  = (blogs) => {
     return null
   }
 
-  const blogsByAuthor = _(blogs)
-    .groupBy(x => x.author)
+  const blogsByAuthor = _.chain(blogs)
+    .groupBy('author')
     .map((value, key) => ({ author: key, blogs: value }))
     .value()
 
-  const mostLikedCount = 0
-  const mostLikedAuthor = [blogsByAuthor].blogs.forEach(el =>)
+  let mostLikedCount = 0
+  const mostLikedAuthor = _(blogs).reduce((function(result, value, key) {
+    (result[value] || (result[value] = [])).push(key)
+    return result
+  }, {}))
+
+  console.log(mostLikedAuthor)
 
   return {
     author: mostLikedAuthor.author,
@@ -73,5 +78,5 @@ module.exports = {
   totalLikes,
   favouriteBlog,
   mostBlogs,
-  mostLikes 
+  mostLikes
 }
