@@ -54,22 +54,25 @@ const mostLikes  = (blogs) => {
     return null
   }
 
-  const blogsByAuthor = _.chain(blogs)
+  const mostLikedAuthor = _.chain(blogs)
     .groupBy('author')
     .map((value, key) => ({ author: key, blogs: value }))
     .value()
 
-  let mostLikedCount = 0
-  const mostLikedAuthor = _(blogs).reduce((function(result, value, key) {
-    (result[value] || (result[value] = [])).push(key)
-    return result
-  }, {}))
+  for(let obj of mostLikedAuthor) {
+    obj.totalLikes = obj.blogs.reduce((acc, cur) =>
+      acc += cur.likes, 0)
+    console.log(obj)
+  }
 
-  console.log(mostLikedAuthor)
+  const bestAuthor = [...mostLikedAuthor].sort((a,b) =>
+    b.blogs.totalLikes - a.blogs.totalLikes)[0]
+
+  console.log(bestAuthor)
 
   return {
-    author: mostLikedAuthor.author,
-    blogs: mostLikedAuthor.blogs.likes
+    author: bestAuthor.author,
+    blogs: bestAuthor.blogs.totalLikes
   }
 }
 
