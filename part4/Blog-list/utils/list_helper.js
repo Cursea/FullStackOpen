@@ -62,17 +62,15 @@ const mostLikes  = (blogs) => {
   for(let obj of mostLikedAuthor) {
     obj.totalLikes = obj.blogs.reduce((acc, cur) =>
       acc += cur.likes, 0)
-    console.log(obj)
+    console.log(`obj: ${JSON.stringify(obj)}`)
   }
 
   const bestAuthor = [...mostLikedAuthor].sort((a,b) =>
-    b.blogs.totalLikes - a.blogs.totalLikes)[0]
-
-  console.log(bestAuthor)
+    b.totalLikes - a.totalLikes)[0]
 
   return {
     author: bestAuthor.author,
-    blogs: bestAuthor.blogs.totalLikes
+    totalLikes: bestAuthor.totalLikes
   }
 }
 
