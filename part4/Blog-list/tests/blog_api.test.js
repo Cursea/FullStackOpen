@@ -33,6 +33,27 @@ test('id property on each blog exists', async () => {
   response.body.forEach((el) => expect(el.id).toBeDefined())
 })
 
+test('new blogs can be added to the blog list', async () => {
+  const newBlog = {
+    title: 'New Blog Test',
+    author: 'Test Tester',
+    url: 'thetest.blogspot.com',
+    likes: 0,
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const blogsAtEnd = await helper.blogsInDb()
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
+
+  const titles = blogsAtEnd.map((blog) => blog.title)
+  expect(titles).toContain('New Blog Test')
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
