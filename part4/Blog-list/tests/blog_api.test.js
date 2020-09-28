@@ -54,6 +54,25 @@ test('new blogs can be added to the blog list', async () => {
   expect(titles).toContain('New Blog Test')
 })
 
+test('blogs with no likes value default to zero likes', async () => {
+  const zeroLikesBlog = {
+    title: 'No one likes this blog',
+    author: 'Cato the unpopular',
+    url: 'roman-revival.blogspot.com'
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(zeroLikesBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const blogsAtEnd = await helper.blogsInDb()
+  const postedBlog = blogsAtEnd.filter(blog => blog.author === 'Cato the unpopular')
+  expect(postedBlog[0].likes).toEqual(0)
+})
+
+
 afterAll(() => {
   mongoose.connection.close()
 })
