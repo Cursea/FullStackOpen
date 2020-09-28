@@ -13,15 +13,20 @@ blogsRouter.post('/', (request, response, next) => {
     title: body.title,
     author: body.author,
     url: body.url,
-    likes: body.likes
+    likes: body.likes,
   })
+
+  if (!blog.title || !blog.url) {
+    response.status(400).end()
+    return
+  }
 
   blog
     .save()
-    .then(savedBlog => {
+    .then((savedBlog) => {
       response.status(201).json(savedBlog)
     })
-    .catch(error => next(error))
+    .catch((error) => next(error))
 })
 
 module.exports = blogsRouter

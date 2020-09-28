@@ -5,6 +5,7 @@ const app = require('../app')
 const api = supertest(app)
 
 const Blog = require('../models/blog')
+const blogsRouter = require('../controllers/blogs')
 
 beforeEach(async () => {
   await Blog.deleteMany({})
@@ -58,7 +59,7 @@ test('blogs with no likes value default to zero likes', async () => {
   const zeroLikesBlog = {
     title: 'No one likes this blog',
     author: 'Cato the unpopular',
-    url: 'roman-revival.blogspot.com'
+    url: 'roman-revival.blogspot.com',
   }
 
   await api
@@ -68,10 +69,23 @@ test('blogs with no likes value default to zero likes', async () => {
     .expect('Content-Type', /application\/json/)
 
   const blogsAtEnd = await helper.blogsInDb()
-  const postedBlog = blogsAtEnd.filter(blog => blog.author === 'Cato the unpopular')
+  const postedBlog = blogsAtEnd.filter(
+    (blog) => blog.author === 'Cato the unpopular'
+  )
   expect(postedBlog[0].likes).toEqual(0)
 })
 
+test('posted blogs with missing title and url are rejected', async () => {
+  const missingPropertiesBlog = {
+    author: 'Cicero the rejected',
+    likes: 54053,
+  }
+
+  await api.post('/api/blogs').send(missingPropertiesBlog).expect(400)
+
+  const blogsAtEnd = await helper.blogsInDb()
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
+})
 
 afterAll(() => {
   mongoose.connection.close()
