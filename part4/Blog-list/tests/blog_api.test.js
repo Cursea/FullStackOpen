@@ -94,19 +94,35 @@ describe('when there are initially some blogs saved', () => {
       const blogsAtStart = await helper.blogsInDb()
       const blogToDelete = blogsAtStart[0]
 
-      await api
-        .delete(`/api/blogs/${blogToDelete.id}`)
-        .expect(204)
+      await api.delete(`/api/blogs/${blogToDelete.id}`).expect(204)
 
       const blogsAtEnd = await helper.blogsInDb()
 
-      expect(blogsAtEnd.length).toBe(
-        helper.initialBlogs.length -1
-      )
+      expect(blogsAtEnd.length).toBe(helper.initialBlogs.length - 1)
 
-      const titles = blogsAtEnd.map(r => r.title)
+      const titles = blogsAtEnd.map((blog) => blog.title)
 
       expect(titles).not.toContain(blogToDelete.title)
+    })
+  })
+
+  describe('updating a blog', () => {
+    test('succeeds with code 200 if id to update is valid', async () => {
+      const blogToUpdate = helper.initialBlogs[0]
+      const blogUpdate = {
+        likes: 9999,
+      }
+
+      await api
+        .put(`/api/blogs/${blogToUpdate._id}`)
+        .send(blogUpdate)
+        .expect(200)
+
+      const blogsAtEnd = await helper.blogsInDb()
+      expect(blogsAtEnd.length).toBe(helper.initialBlogs.length)
+
+      const likes = blogsAtEnd.map((blog) => blog.likes)
+      expect(likes).toContain(9999)
     })
   })
 })
