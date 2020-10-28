@@ -1,5 +1,6 @@
 const config = require('./utils/config')
 const express = require('express')
+require('express-async-errors') //replaces try/catch for unhandled async promises
 const app = express()
 const bodyParser = require('body-parser')
 const cors = require('cors')
