@@ -2,8 +2,9 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-    "title": "The Sartorialist",
-    "author": "Scott Schuman",
-    "url": "thesartorialist.blogspot.com",
-    "likes": 981011
+    "title": "Blog from user 2: Electic Boogaloo",
+    "author": "Keya, herself",
+    "url": "sparkle.com/blogs/boogaloo2",
+    "likes": 16,
+    "userId": "5fa1d495b61ad521fcce69b2"
 }
